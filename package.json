@@ -1,5 +1,5 @@
 {
-  "name": "spiritual-streams",
+  "name": "frontend",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -48,4 +48,4 @@
     "typescript-eslint": "^8.11.0",
     "vite": "^5.4.10"
   }
-} 
+}

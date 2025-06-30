@@ -28,4 +28,4 @@
 		"noUncheckedSideEffectImports": true
 	},
 	"include": ["src"]
-} 
+}
