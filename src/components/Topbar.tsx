@@ -34,17 +34,18 @@ const Topbar = () => {
 				<SearchBox onSearch={handleSearch} />
 			</div>
 
-			<div className='flex items-center gap-4'>
-				{isAdmin && (
+			<div className='flex items-center gap-8 ml-4'>
+				{/* {isAdmin && (
 					<Link to={"/admin"} className={cn(buttonVariants({ variant: "outline" }))}>
 						<LayoutDashboardIcon className='size-4  mr-2' />
 						Admin Dashboard
 					</Link>
-				)}
+				)} */}
 
 				{!isAuthenticated ? (
-					<Link to="/login" className={cn(buttonVariants({ variant: "outline" }))}>
-						Sign In
+					<Link to="/login" className={cn(buttonVariants({ variant: "outline", className: "md:gap-2" }))}>
+						<User className="h-4 w-4" />
+						<span className="hidden md:inline">Sign In</span>
 					</Link>
 				) : (
 					<DropdownMenu>

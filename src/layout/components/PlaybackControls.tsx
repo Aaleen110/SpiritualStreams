@@ -60,9 +60,30 @@ export const PlaybackControls = () => {
 	};
 
 	return (
-		<footer className='h-20 sm:h-24 bg-zinc-900 border-t border-zinc-800 px-4'>
+		<footer className='fixed sm:relative bottom-0 left-0 right-0 h-16 sm:h-24 bg-zinc-900 border-t border-zinc-800 px-2 sm:px-4 flex-shrink-0 z-50'>
 			<div className='flex justify-between items-center h-full max-w-[1800px] mx-auto'>
-				{/* currently playing song */}
+				{/* currently playing song - mobile version with small image */}
+				<div className='flex sm:hidden items-center gap-3 min-w-0 flex-1'>
+					{currentSong && currentSermon && (
+						<>
+							<img
+								src={currentSermon.imageUrl}
+								alt={currentSermon.title}
+								className='w-10 h-10 object-cover rounded-md flex-shrink-0'
+							/>
+							<div className='flex-1 min-w-0'>
+								<div className='font-medium truncate text-sm'>
+									{currentSong.title}
+								</div>
+								<div className='text-xs text-zinc-400 truncate'>
+									{currentSermon.preacher}
+								</div>
+							</div>
+						</>
+					)}
+				</div>
+
+				{/* currently playing song - desktop version */}
 				<div className='hidden sm:flex items-center gap-4 min-w-[180px] w-[30%]'>
 					{currentSong && currentSermon && (
 						<>
@@ -83,9 +104,9 @@ export const PlaybackControls = () => {
 					)}
 				</div>
 
-				{/* player controls*/}
-				<div className='flex flex-col items-center gap-2 flex-1 max-w-full sm:max-w-[45%]'>
-					<div className='flex items-center gap-4 sm:gap-6'>
+				{/* player controls - centered on mobile */}
+				<div className='flex flex-col items-center gap-1 sm:gap-2 flex-1 max-w-full sm:max-w-[45%] justify-center'>
+					<div className='flex items-center gap-3 sm:gap-6'>
 						{/* <Button
 							size='icon'
 							variant='ghost'
@@ -106,11 +127,11 @@ export const PlaybackControls = () => {
 
 						<Button
 							size='icon'
-							className='bg-white hover:bg-white/80 text-black rounded-full h-8 w-8'
+							className='bg-white hover:bg-white/80 text-black rounded-full h-8 w-8 sm:h-10 sm:w-10'
 							onClick={togglePlay}
 							disabled={!currentSong}
 						>
-							{isPlaying ? <Pause className='h-5 w-5' /> : <Play className='h-5 w-5' />}
+							{isPlaying ? <Pause className='h-4 w-4 sm:h-5 sm:w-5' /> : <Play className='h-4 w-4 sm:h-5 sm:w-5' />}
 						</Button>
 						<Button
 							size='icon'
@@ -142,7 +163,7 @@ export const PlaybackControls = () => {
 						<div className='text-xs text-zinc-400'>{formatTime(duration)}</div>
 					</div>
 				</div>
-				{/* volume controls */}
+				{/* volume controls - hidden on mobile */}
 				<div className='hidden sm:flex items-center gap-4 min-w-[180px] w-[30%] justify-end'>
 					{/* <Button size='icon' variant='ghost' className='hover:text-white text-zinc-400'>
 						<Mic2 className='h-4 w-4' />
@@ -204,6 +225,22 @@ export const PlaybackControls = () => {
 							}}
 						/>
 					</div>
+				</div>
+
+				{/* mobile transcript button */}
+				<div className='flex sm:hidden items-center'>
+					<Button 
+						size='icon' 
+						variant='ghost' 
+						className='hover:text-white text-zinc-400' 
+						onClick={() => {
+							if (currentSermon && currentSong) {
+								openTranscript(currentSermon, currentSong);
+							}
+						}}
+					>
+						<Laptop2 className='h-4 w-4' />
+					</Button>
 				</div>
 			</div>
 		</footer>

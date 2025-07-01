@@ -35,8 +35,8 @@ const LeftSidebar = () => {
 						)}
 					>
 						<div className='flex gap-2 items-center text-base'>
-							<img src='/spiritual-streams.png' className='size-9' alt='Spiritual Streams logo' />
-							Spiritual Streams
+							<img src='/spiritual-streams.png' className='size-9 object-contain' alt='Spiritual Streams logo' />
+							<span className='hidden md:inline'>Spiritual Streams</span>
 						</div>
 					</Link>
 
@@ -52,7 +52,7 @@ const LeftSidebar = () => {
 					</div>
 				</div>
 
-				<ScrollArea className='h-[calc(100vh-300px)]'>
+				<ScrollArea className='h-[calc(100vh-300px)] sm:h-[calc(100vh-320px)]'>
 					<div className='space-y-2'>
 						{sermons.map((sermon) => (
 							<Link

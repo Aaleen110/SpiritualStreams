@@ -37,7 +37,7 @@ const LoginPage = () => {
 				<div className="text-center">
 					<div className="flex justify-center mb-6">
 						<div className="p-3 bg-[#D77B1E] rounded-full">
-							<Music className="h-8 w-8 text-white" />
+							<img src="/spiritual-streams.png" alt="Logo" className="h-8 w-8" />
 						</div>
 					</div>
 					<h2 className="text-3xl font-bold text-white">Welcome back</h2>
