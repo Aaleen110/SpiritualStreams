@@ -1,15 +1,15 @@
 import { create } from "zustand";
-import { Song } from "@/types";
+import { SermonPart } from "@/types";
 
 interface PlayerStore {
-	currentSong: Song | null;
+	currentSong: SermonPart | null;
 	isPlaying: boolean;
-	queue: Song[];
+	queue: SermonPart[];
 	currentIndex: number;
 
-	initializeQueue: (songs: Song[]) => void;
-	playAlbum: (songs: Song[], startIndex?: number) => void;
-	setCurrentSong: (song: Song | null) => void;
+	initializeQueue: (parts: SermonPart[]) => void;
+	playAlbum: (parts: SermonPart[], startIndex?: number) => void;
+	setCurrentSong: (part: SermonPart | null) => void;
 	togglePlay: () => void;
 	playNext: () => void;
 	playPrevious: () => void;
@@ -21,35 +21,35 @@ export const usePlayerStore = create<PlayerStore>((set, get) => ({
 	queue: [],
 	currentIndex: -1,
 
-	initializeQueue: (songs: Song[]) => {
+	initializeQueue: (parts: SermonPart[]) => {
 		set({
-			queue: songs,
-			currentSong: get().currentSong || songs[0],
+			queue: parts,
+			currentSong: get().currentSong || parts[0],
 			currentIndex: get().currentIndex === -1 ? 0 : get().currentIndex,
 		});
 	},
 
-	playAlbum: (songs: Song[], startIndex = 0) => {
-		if (songs.length === 0) return;
+	playAlbum: (parts: SermonPart[], startIndex = 0) => {
+		if (parts.length === 0) return;
 
-		const song = songs[startIndex];
+		const part = parts[startIndex];
 
 		set({
-			queue: songs,
-			currentSong: song,
+			queue: parts,
+			currentSong: part,
 			currentIndex: startIndex,
 			isPlaying: true,
 		});
 	},
 
-	setCurrentSong: (song: Song | null) => {
-		if (!song) return;
+	setCurrentSong: (part: SermonPart | null) => {
+		if (!part) return;
 
-		const songIndex = get().queue.findIndex((s) => s._id === song._id);
+		const partIndex = get().queue.findIndex((s) => s._id === part._id);
 		set({
-			currentSong: song,
+			currentSong: part,
 			isPlaying: true,
-			currentIndex: songIndex !== -1 ? songIndex : get().currentIndex,
+			currentIndex: partIndex !== -1 ? partIndex : get().currentIndex,
 		});
 	},
 
@@ -67,10 +67,10 @@ export const usePlayerStore = create<PlayerStore>((set, get) => ({
 
 		// if there is a next song to play, let's play it
 		if (nextIndex < queue.length) {
-			const nextSong = queue[nextIndex];
+			const nextPart = queue[nextIndex];
 
 			set({
-				currentSong: nextSong,
+				currentSong: nextPart,
 				currentIndex: nextIndex,
 				isPlaying: true,
 			});
@@ -85,10 +85,10 @@ export const usePlayerStore = create<PlayerStore>((set, get) => ({
 
 		// theres a prev song
 		if (prevIndex >= 0) {
-			const prevSong = queue[prevIndex];
+			const prevPart = queue[prevIndex];
 
 			set({
-				currentSong: prevSong,
+				currentSong: prevPart,
 				currentIndex: prevIndex,
 				isPlaying: true,
 			});

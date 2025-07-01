@@ -1,8 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { usePlayerStore } from "@/stores/usePlayerStore";
+import { useTranscriptStore } from "@/stores/useTranscriptStore";
 import { Laptop2, ListMusic, Mic2, Pause, Play, Repeat, Shuffle, SkipBack, SkipForward, Volume1 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { sermons } from "../../lib/mockData";
+// import { useParams } from "react-router-dom";
 
 const formatTime = (seconds: number) => {
 	const minutes = Math.floor(seconds / 60);
@@ -12,8 +15,15 @@ const formatTime = (seconds: number) => {
 
 export const PlaybackControls = () => {
 	const { currentSong, isPlaying, togglePlay, playNext, playPrevious } = usePlayerStore();
-
+	const { openTranscript } = useTranscriptStore();
+	// const { sermonId } = useParams();
+	// Find the sermon that contains the currently playing song
+	const currentSermon = currentSong ? sermons.find((sermon) => 
+		sermon.parts.some((part) => part._id === currentSong._id)
+	) : null;
+	
 	const [volume, setVolume] = useState(75);
+	const [previousVolume, setPreviousVolume] = useState(75);
 	const [currentTime, setCurrentTime] = useState(0);
 	const [duration, setDuration] = useState(0);
 	const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -54,11 +64,11 @@ export const PlaybackControls = () => {
 			<div className='flex justify-between items-center h-full max-w-[1800px] mx-auto'>
 				{/* currently playing song */}
 				<div className='hidden sm:flex items-center gap-4 min-w-[180px] w-[30%]'>
-					{currentSong && (
+					{currentSong && currentSermon && (
 						<>
 							<img
-								src={currentSong.imageUrl}
-								alt={currentSong.title}
+								src={currentSermon.imageUrl}
+								alt={currentSermon.title}
 								className='w-14 h-14 object-cover rounded-md'
 							/>
 							<div className='flex-1 min-w-0'>
@@ -66,7 +76,7 @@ export const PlaybackControls = () => {
 									{currentSong.title}
 								</div>
 								<div className='text-sm text-zinc-400 truncate hover:underline cursor-pointer'>
-									{currentSong.artist}
+									{currentSermon.preacher}
 								</div>
 							</div>
 						</>
@@ -76,13 +86,13 @@ export const PlaybackControls = () => {
 				{/* player controls*/}
 				<div className='flex flex-col items-center gap-2 flex-1 max-w-full sm:max-w-[45%]'>
 					<div className='flex items-center gap-4 sm:gap-6'>
-						<Button
+						{/* <Button
 							size='icon'
 							variant='ghost'
 							className='hidden sm:inline-flex hover:text-white text-zinc-400'
 						>
 							<Shuffle className='h-4 w-4' />
-						</Button>
+						</Button> */}
 
 						<Button
 							size='icon'
@@ -111,13 +121,13 @@ export const PlaybackControls = () => {
 						>
 							<SkipForward className='h-4 w-4' />
 						</Button>
-						<Button
+						{/* <Button
 							size='icon'
 							variant='ghost'
 							className='hidden sm:inline-flex hover:text-white text-zinc-400'
 						>
 							<Repeat className='h-4 w-4' />
-						</Button>
+						</Button> */}
 					</div>
 
 					<div className='hidden sm:flex items-center gap-2 w-full'>
@@ -134,19 +144,51 @@ export const PlaybackControls = () => {
 				</div>
 				{/* volume controls */}
 				<div className='hidden sm:flex items-center gap-4 min-w-[180px] w-[30%] justify-end'>
-					<Button size='icon' variant='ghost' className='hover:text-white text-zinc-400'>
+					{/* <Button size='icon' variant='ghost' className='hover:text-white text-zinc-400'>
 						<Mic2 className='h-4 w-4' />
 					</Button>
 					<Button size='icon' variant='ghost' className='hover:text-white text-zinc-400'>
 						<ListMusic className='h-4 w-4' />
-					</Button>
-					<Button size='icon' variant='ghost' className='hover:text-white text-zinc-400'>
+					</Button> */}
+					{/* this will open transcript modal */}
+					<Button 
+						size='icon' 
+						variant='ghost' 
+						className='hover:text-white text-zinc-400' 
+						onClick={() => {
+							if (currentSermon && currentSong) {
+								openTranscript(currentSermon, currentSong);
+							}
+						}}
+					>
 						<Laptop2 className='h-4 w-4' />
 					</Button>
 
 					<div className='flex items-center gap-2'>
-						<Button size='icon' variant='ghost' className='hover:text-white text-zinc-400'>
-							<Volume1 className='h-4 w-4' />
+						<Button 
+							size='icon' 
+							variant='ghost' 
+							className='hover:text-white text-zinc-400'
+							onClick={() => {
+								if (audioRef.current) {
+									if (volume > 0) {
+										// Mute: store current volume and set to 0
+										setPreviousVolume(volume);
+										audioRef.current.volume = 0;
+										setVolume(0);
+									} else {
+										// Unmute: restore previous volume
+										audioRef.current.volume = previousVolume / 100;
+										setVolume(previousVolume);
+									}
+								}
+							}}
+						>
+							{volume === 0 ? (
+								<Volume1 className='h-4 w-4' fill="currentColor" />
+							) : (
+								<Volume1 className='h-4 w-4' />
+							)}
 						</Button>
 
 						<Slider

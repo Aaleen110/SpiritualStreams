@@ -233,3 +233,102 @@ export const getUsers = (): User[] => {
 export const getMessages = (): Message[] => {
   return mockMessages;
 }; 
+
+
+
+export const sermons = [
+  {
+    _id: "1",
+    title: "Ghadeer",
+    preacher: "Imam Ali (as)",
+    imageUrl: "/cover-images/1.jpg",
+    date: "10 AH",
+    parts: [
+      {
+        _id: "1_1",
+        title: "Ghadeer - Part 1",
+        audioUrl: "/sermons/1.mp3",
+        duration: 200,
+        transcript: `All Praise is due to Allah Who is Exalted in His Unity, Near in His Uniqueness, Sublime in His Authority, Magnanimous in His Dominance. He knows everything; He subdues all creation through His might and evidence. He is Praised always and forever, Glorified and has no end. He begins and He repeats, and to Him every matter is referred.
+
+Allah is the Creator of everything; He dominates with His power the earth and the heavens. Holy, He is, and Praised, the Lord of the angels and of the spirits. His favours overwhelm whatever He creates, and He is the Mighty over whatever He initiates. He observes all eyes while no eye can observe Him. He is Generous, Clement, Patient. His mercy encompasses everything, and so is His giving. He never rushes His revenge, nor does He hasten the retribution they deserve. He comprehends what the breast conceals and what the conscience hides. No inner I thought can be concealed from Him, nor does He confuse one with another. He encompasses everything, dominates everything, and subdues everything. Nothing is like Him. He initiates the creation from nothing; He is everlasting, living, sustaining in the truth; there is no god but He, the Omnipotent, the Wise One.
+
+He is greater than can be conceived by visions, while He conceives all visions, the Eternal, the Knowing. None can describe Him by seeing Him, nor can anyone find out how He is, be it by his intellect or by a spoken word except through what leads to Him, the Sublime, the Mighty that He is.`
+      },
+      {
+        _id: "1_2",
+        title: "Ghadeer - Part 2",
+        audioUrl: "/sermons/2.mp3",
+        duration: 233,
+        transcript: `All Praise is due to Allah Who is Exalted in His Unity, Near in His Uniqueness, Sublime in His Authority, Magnanimous in His Dominance. He knows everything; He subdues all creation through His might and evidence. He is Praised always and forever, Glorified and has no end. He begins and He repeats, and to Him every matter is referred.
+
+Allah is the Creator of everything; He dominates with His power the earth and the heavens. Holy, He is, and Praised, the Lord of the angels and of the spirits. His favours overwhelm whatever He creates, and He is the Mighty over whatever He initiates. He observes all eyes while no eye can observe Him. He is Generous, Clement, Patient. His mercy encompasses everything, and so is His giving. He never rushes His revenge, nor does He hasten the retribution they deserve. He comprehends what the breast conceals and what the conscience hides. No inner I thought can be concealed from Him, nor does He confuse one with another. He encompasses everything, dominates everything, and subdues everything. Nothing is like Him. He initiates the creation from nothing; He is everlasting, living, sustaining in the truth; there is no god but He, the Omnipotent, the Wise One.
+
+He is greater than can be conceived by visions, while He conceives all visions, the Eternal, the Knowing. None can describe Him by seeing Him, nor can anyone find out how He is, be it by his intellect or by a spoken word except through what leads to Him, the Sublime, the Mighty that He is.`
+      },
+      {
+        _id: "1_3",
+        title: "Ghadeer - Part 3",
+        audioUrl: "/sermons/3.mp3",
+        duration: 209,
+        transcript: `All Praise is due to Allah Who is Exalted in His Unity, Near in His Uniqueness, Sublime in His Authority, Magnanimous in His Dominance. He knows everything; He subdues all creation through His might and evidence. He is Praised always and forever, Glorified and has no end. He begins and He repeats, and to Him every matter is referred.
+
+Allah is the Creator of everything; He dominates with His power the earth and the heavens. Holy, He is, and Praised, the Lord of the angels and of the spirits. His favours overwhelm whatever He creates, and He is the Mighty over whatever He initiates. He observes all eyes while no eye can observe Him. He is Generous, Clement, Patient. His mercy encompasses everything, and so is His giving. He never rushes His revenge, nor does He hasten the retribution they deserve. He comprehends what the breast conceals and what the conscience hides. No inner I thought can be concealed from Him, nor does He confuse one with another. He encompasses everything, dominates everything, and subdues everything. Nothing is like Him. He initiates the creation from nothing; He is everlasting, living, sustaining in the truth; there is no god but He, the Omnipotent, the Wise One.
+
+He is greater than can be conceived by visions, while He conceives all visions, the Eternal, the Knowing. None can describe Him by seeing Him, nor can anyone find out how He is, be it by his intellect or by a spoken word except through what leads to Him, the Sublime, the Mighty that He is.`
+      },
+    ],
+  },
+  {
+    _id: "2",
+    title: "Bibi Zainab in Sham",
+    preacher: "Sayyeda Zainab (as)",
+    imageUrl: "/cover-images/2.jpg",
+    date: "61 AH",
+    parts: [
+      {
+        _id: "2_1",
+        title: "Bibi Zainab in Sham - Part 1",
+        audioUrl: "/sermons/4.mp3",
+        duration: 200,
+        transcript: `All Praise is due to Allah Who is Exalted in His Unity, Near in His Uniqueness, Sublime in His Authority, Magnanimous in His Dominance. He knows everything; He subdues all creation through His might and evidence. He is Praised always and forever, Glorified and has no end. He begins and He repeats, and to Him every matter is referred.
+
+Allah is the Creator of everything; He dominates with His power the earth and the heavens. Holy, He is, and Praised, the Lord of the angels and of the spirits. His favours overwhelm whatever He creates, and He is the Mighty over whatever He initiates. He observes all eyes while no eye can observe Him. He is Generous, Clement, Patient. His mercy encompasses everything, and so is His giving. He never rushes His revenge, nor does He hasten the retribution they deserve. He comprehends what the breast conceals and what the conscience hides. No inner I thought can be concealed from Him, nor does He confuse one with another. He encompasses everything, dominates everything, and subdues everything. Nothing is like Him. He initiates the creation from nothing; He is everlasting, living, sustaining in the truth; there is no god but He, the Omnipotent, the Wise One.
+
+He is greater than can be conceived by visions, while He conceives all visions, the Eternal, the Knowing. None can describe Him by seeing Him, nor can anyone find out how He is, be it by his intellect or by a spoken word except through what leads to Him, the Sublime, the Mighty that He is.`
+      },
+      {
+        _id: "2_2",
+        title: "Bibi Zainab in Sham - Part 2",
+        audioUrl: "/sermons/5.mp3",
+        duration: 233,
+        transcript: `All Praise is due to Allah Who is Exalted in His Unity, Near in His Uniqueness, Sublime in His Authority, Magnanimous in His Dominance. He knows everything; He subdues all creation through His might and evidence. He is Praised always and forever, Glorified and has no end. He begins and He repeats, and to Him every matter is referred.
+
+Allah is the Creator of everything; He dominates with His power the earth and the heavens. Holy, He is, and Praised, the Lord of the angels and of the spirits. His favours overwhelm whatever He creates, and He is the Mighty over whatever He initiates. He observes all eyes while no eye can observe Him. He is Generous, Clement, Patient. His mercy encompasses everything, and so is His giving. He never rushes His revenge, nor does He hasten the retribution they deserve. He comprehends what the breast conceals and what the conscience hides. No inner I thought can be concealed from Him, nor does He confuse one with another. He encompasses everything, dominates everything, and subdues everything. Nothing is like Him. He initiates the creation from nothing; He is everlasting, living, sustaining in the truth; there is no god but He, the Omnipotent, the Wise One.
+
+He is greater than can be conceived by visions, while He conceives all visions, the Eternal, the Knowing. None can describe Him by seeing Him, nor can anyone find out how He is, be it by his intellect or by a spoken word except through what leads to Him, the Sublime, the Mighty that He is.`
+      },
+    ],
+  },
+  {
+    _id: "3",
+    title: "Hazrat Abbas (as) in Mecca",
+    preacher: "Hazrat Abbas (as)",
+    imageUrl: "/cover-images/3.jpg",
+    date: "61 AH",
+    parts: [
+      {
+        _id: "3_1",
+        title: "Hazrat Abbas (as) in Mecca - Part 1",
+        audioUrl: "/sermons/6.mp3",
+        duration: 200,
+        transcript: `All Praise is due to Allah Who is Exalted in His Unity, Near in His Uniqueness, Sublime in His Authority, Magnanimous in His Dominance. He knows everything; He subdues all creation through His might and evidence. He is Praised always and forever, Glorified and has no end. He begins and He repeats, and to Him every matter is referred.
+
+Allah is the Creator of everything; He dominates with His power the earth and the heavens. Holy, He is, and Praised, the Lord of the angels and of the spirits. His favours overwhelm whatever He creates, and He is the Mighty over whatever He initiates. He observes all eyes while no eye can observe Him. He is Generous, Clement, Patient. His mercy encompasses everything, and so is His giving. He never rushes His revenge, nor does He hasten the retribution they deserve. He comprehends what the breast conceals and what the conscience hides. No inner I thought can be concealed from Him, nor does He confuse one with another. He encompasses everything, dominates everything, and subdues everything. Nothing is like Him. He initiates the creation from nothing; He is everlasting, living, sustaining in the truth; there is no god but He, the Omnipotent, the Wise One.
+
+He is greater than can be conceived by visions, while He conceives all visions, the Eternal, the Knowing. None can describe Him by seeing Him, nor can anyone find out how He is, be it by his intellect or by a spoken word except through what leads to Him, the Sublime, the Mighty that He is.`
+      }
+    ]
+  },
+
+];

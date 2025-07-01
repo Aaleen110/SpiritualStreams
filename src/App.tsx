@@ -32,7 +32,7 @@ function App() {
 				<Route element={<MainLayout />}>
 					<Route path='/' element={<HomePage />} />
 					{/* <Route path='/chat' element={<ProtectedRoute><ChatPage /></ProtectedRoute>} /> */}
-					<Route path='/albums/:albumId' element={<AlbumPage />} />
+					<Route path='/sermons/:sermonId' element={<AlbumPage />} />
 					<Route path='*' element={<NotFoundPage />} />
 				</Route>
 			</Routes>

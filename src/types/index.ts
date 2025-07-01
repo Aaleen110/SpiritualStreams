@@ -19,6 +19,23 @@ export interface Album {
 	songs: Song[];
 }
 
+export interface SermonPart {
+	_id: string;
+	title: string;
+	audioUrl: string;
+	duration: number;
+	transcript: string;
+}
+
+export interface Sermon {
+	_id: string;
+	title: string;
+	preacher: string;
+	imageUrl: string;
+	date: string;
+	parts: SermonPart[];
+}
+
 export interface Stats {
 	totalSongs: number;
 	totalAlbums: number;

@@ -4,10 +4,13 @@ import LeftSidebar from "./components/LeftSidebar";
 // import FriendsActivity from "./components/FriendsActivity";
 import AudioPlayer from "./components/AudioPlayer";
 import { PlaybackControls } from "./components/PlaybackControls";
+import TranscriptModal from "@/components/TranscriptModal";
+import { useTranscriptStore } from "@/stores/useTranscriptStore";
 import { useEffect, useState } from "react";
 
 const MainLayout = () => {
 	const [isMobile, setIsMobile] = useState(false);
+	const { isOpen, currentSermon, currentSermonPart, closeTranscript } = useTranscriptStore();
 
 	useEffect(() => {
 		const checkMobile = () => {
@@ -47,7 +50,14 @@ const MainLayout = () => {
 				)}
 			</ResizablePanelGroup>
 
-			<PlaybackControls />
+			<PlaybackControls  />
+			
+			<TranscriptModal
+				isOpen={isOpen}
+				onClose={closeTranscript}
+				sermon={currentSermon}
+				sermonPart={currentSermonPart}
+			/>
 		</div>
 	);
 };
