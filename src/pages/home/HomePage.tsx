@@ -1,37 +1,20 @@
 import Topbar from "@/components/Topbar";
-// import { useMusicStore } from "@/stores/useMusicStore";
 import { useEffect } from "react";
 import FeaturedSection from "./components/FeaturedSection";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import SectionGrid from "./components/SectionGrid";
-// import { usePlayerStore } from "@/stores/usePlayerStore";
-import { sermons } from "@/lib/mockData";
+import { useSermons } from "@/hooks/useSermons";
+// Removed useAudioStore import - no longer needed
 
 const HomePage = () => {
-	// const {
-	// 	fetchFeaturedSongs,
-	// 	fetchMadeForYouSongs,
-	// 	fetchTrendingSongs,
-	// 	isLoading,
-	// 	madeForYouSongs,
-	// 	featuredSongs,
-	// 	trendingSongs,
-	// } = useMusicStore();
+	const {
+		sermons,
+		isLoading,
+		error,
+	
+	} = useSermons({ limit: 20 });
 
-	// const { initializeQueue } = usePlayerStore();
-
-	// useEffect(() => {
-	// 	fetchFeaturedSongs();
-	// 	fetchMadeForYouSongs();
-	// 	fetchTrendingSongs();
-	// }, [fetchFeaturedSongs, fetchMadeForYouSongs, fetchTrendingSongs]);
-
-	// useEffect(() => {
-	// 	if (madeForYouSongs.length > 0 && featuredSongs.length > 0 && trendingSongs.length > 0) {
-	// 		const allSongs = [...featuredSongs, ...madeForYouSongs, ...trendingSongs];
-	// 		initializeQueue(allSongs);
-	// 	}
-	// }, [initializeQueue, madeForYouSongs, trendingSongs, featuredSongs]);
+	// Queue initialization is now handled by individual components
 
 	// Get featured sermons (first 3 sermons)
 	const featuredSermons = sermons.slice(0, 3);
@@ -47,15 +30,35 @@ const HomePage = () => {
 			<Topbar />
 			<ScrollArea className='h-[calc(100vh-180px)] sm:h-[calc(100vh-200px)]'>
 				<div className='p-4 sm:p-6'>
-					<></>
+					{error && (
+						<div className="mb-4 p-4 bg-red-900/20 border border-red-800 rounded-md">
+							<p className="text-red-400 text-sm">{error}</p>
+						</div>
+					)}
+					
 					<h1 className='text-2xl sm:text-3xl font-bold mb-6'>Good afternoon</h1>
+					
+					{isLoading ? (
+						<div className="space-y-8">
+							<div className="animate-pulse">
+								<h2 className="text-xl font-semibold mb-4 bg-zinc-700 h-6 w-32 rounded"></h2>
+								<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+									{Array.from({ length: 6 }).map((_, i) => (
+										<div key={i} className="bg-zinc-800 h-48 rounded-md"></div>
+									))}
+								</div>
+							</div>
+						</div>
+					) : (
+						<>
 					<FeaturedSection sermons={featuredSermons} />
 
 					<div className='space-y-8'>
 						<SectionGrid title='Made For You' sermons={madeForYouSermons} />
-						<SectionGrid title='Trending' sermons={trendingSermons} />
+						{/* <SectionGrid title='Trending' sermons={trendingSermons} /> */}
 					</div>
-					
+						</>
+					)}
 				</div>
 			</ScrollArea>
 		</main>

@@ -46,7 +46,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
 	error: null,
 	isAuthenticated: false,
 
-	login: async (email: string, password: string) => {
+	login: async (email: string, _password: string) => {
 		set({ isLoading: true, error: null });
 		try {
 			// Simulate API delay

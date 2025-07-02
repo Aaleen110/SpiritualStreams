@@ -1,5 +1,5 @@
 // import { useMusicStore } from "@/stores/useMusicStore";
-import FeaturedGridSkeleton from "@/components/skeletons/FeaturedGridSkeleton";
+// import FeaturedGridSkeleton from "@/components/skeletons/FeaturedGridSkeleton";
 import PlayButton from "./PlayButton";
 import { Sermon } from "@/types";
 import { usePlayerStore } from "@/stores/usePlayerStore";
@@ -19,10 +19,14 @@ const FeaturedSection = ({ sermons }: FeaturedSectionProps) => {
 		<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8'>
 			{sermons.map((sermon) => (
 				<div
-					key={sermon._id}
+					key={sermon.id}
 					className='flex items-center bg-zinc-800/50 rounded-md overflow-hidden
          hover:bg-zinc-700/50 transition-colors group cursor-pointer relative'
-					onClick={() => playAlbum(sermon.parts, 0)}
+					onClick={() => {
+						if (sermon.parts && sermon.parts.length > 0) {
+							playAlbum(sermon.parts, 0);
+						}
+					}}
 				>
 					<img
 						src={sermon.imageUrl}

@@ -1,5 +1,5 @@
 export interface Song {
-	_id: string;
+	id: string;
 	title: string;
 	artist: string;
 	albumId: string | null;
@@ -11,7 +11,7 @@ export interface Song {
 }
 
 export interface Album {
-	_id: string;
+	id: string;
 	title: string;
 	artist: string;
 	imageUrl: string;
@@ -20,19 +20,25 @@ export interface Album {
 }
 
 export interface SermonPart {
-	_id: string;
+	id: string;
+	sermonId: string;
 	title: string;
 	audioUrl: string;
 	duration: number;
 	transcript: string;
+	partNumber: number;
+	createdAt: string;
+	updatedAt: string;
 }
 
 export interface Sermon {
-	_id: string;
+	id: string;
 	title: string;
 	preacher: string;
 	imageUrl: string;
 	date: string;
+	createdAt: string;
+	updatedAt: string;
 	parts: SermonPart[];
 }
 
@@ -44,7 +50,7 @@ export interface Stats {
 }
 
 export interface Message {
-	_id: string;
+	id: string;
 	senderId: string;
 	receiverId: string;
 	content: string;
@@ -53,7 +59,6 @@ export interface Message {
 }
 
 export interface User {
-	_id: string;
 	id: string;
 	fullName: string;
 	imageUrl: string;

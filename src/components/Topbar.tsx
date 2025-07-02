@@ -1,4 +1,4 @@
-import { LayoutDashboardIcon, LogOut, User } from "lucide-react";
+import { LogOut, User } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { cn } from "@/lib/utils";
@@ -14,7 +14,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import SearchBox from "./SearchBox";
 
 const Topbar = () => {
-	const { isAdmin, user, isAuthenticated, logout } = useAuthStore();
+	const { user, isAuthenticated, logout } = useAuthStore();
 
 	const handleSearch = (query: string) => {
 		console.log("Search query:", query);
@@ -35,6 +35,11 @@ const Topbar = () => {
 			</div>
 
 			<div className='flex items-center gap-8 ml-4'>
+				{/* Test Audio Link */}
+				{/* <Link to="/test-audio" className={cn(buttonVariants({ variant: "outline", size: "sm" }))}>
+					Test Audio
+				</Link> */}
+
 				{/* {isAdmin && (
 					<Link to={"/admin"} className={cn(buttonVariants({ variant: "outline" }))}>
 						<LayoutDashboardIcon className='size-4  mr-2' />

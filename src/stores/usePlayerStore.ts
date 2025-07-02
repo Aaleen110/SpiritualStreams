@@ -30,9 +30,10 @@ export const usePlayerStore = create<PlayerStore>((set, get) => ({
 	},
 
 	playAlbum: (parts: SermonPart[], startIndex = 0) => {
-		if (parts.length === 0) return;
+		if (!parts || parts.length === 0) return;
 
 		const part = parts[startIndex];
+		if (!part) return;
 
 		set({
 			queue: parts,
@@ -45,7 +46,7 @@ export const usePlayerStore = create<PlayerStore>((set, get) => ({
 	setCurrentSong: (part: SermonPart | null) => {
 		if (!part) return;
 
-		const partIndex = get().queue.findIndex((s) => s._id === part._id);
+		  const partIndex = get().queue.findIndex((s) => s.id === part.id);
 		set({
 			currentSong: part,
 			isPlaying: true,

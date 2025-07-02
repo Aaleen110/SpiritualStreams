@@ -3,10 +3,10 @@ import { create } from "zustand";
 
 interface TranscriptStore {
 	isOpen: boolean;
-	currentSermon: Sermon | null;
+	currentSermon: Partial<Sermon> | null;
 	currentSermonPart: SermonPart | null;
 	
-	openTranscript: (sermon: Sermon, sermonPart: SermonPart) => void;
+	openTranscript: (sermon: Partial<Sermon>, sermonPart: SermonPart) => void;
 	closeTranscript: () => void;
 }
 
@@ -15,7 +15,7 @@ export const useTranscriptStore = create<TranscriptStore>((set) => ({
 	currentSermon: null,
 	currentSermonPart: null,
 	
-	openTranscript: (sermon: Sermon, sermonPart: SermonPart) => {
+	openTranscript: (sermon: Partial<Sermon>, sermonPart: SermonPart) => {
 		set({
 			isOpen: true,
 			currentSermon: sermon,

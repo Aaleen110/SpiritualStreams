@@ -5,6 +5,7 @@ import LeftSidebar from "./components/LeftSidebar";
 import AudioPlayer from "./components/AudioPlayer";
 import { PlaybackControls } from "./components/PlaybackControls";
 import TranscriptModal from "@/components/TranscriptModal";
+// DebugAudio import removed
 import { useTranscriptStore } from "@/stores/useTranscriptStore";
 import { useEffect, useState } from "react";
 
@@ -25,7 +26,6 @@ const MainLayout = () => {
 	return (
 		<div className='h-screen bg-black text-white flex flex-col overflow-hidden'>
 			<ResizablePanelGroup direction='horizontal' className='flex-1 flex overflow-hidden p-2'>
-				<AudioPlayer />
 				{/* left sidebar */}
 				<ResizablePanel defaultSize={20} minSize={isMobile ? 0 : 10} maxSize={30}>
 					<LeftSidebar />
@@ -50,7 +50,9 @@ const MainLayout = () => {
 				)}
 			</ResizablePanelGroup>
 
-			<PlaybackControls  />
+			{/* Audio Player and Playback Controls */}
+			<AudioPlayer />
+			<PlaybackControls />
 			
 			<TranscriptModal
 				isOpen={isOpen}
@@ -58,6 +60,8 @@ const MainLayout = () => {
 				sermon={currentSermon}
 				sermonPart={currentSermonPart}
 			/>
+			
+			{/* Debug component removed */}
 		</div>
 	);
 };

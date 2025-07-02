@@ -56,8 +56,8 @@ const LeftSidebar = () => {
 					<div className='space-y-2'>
 						{sermons.map((sermon) => (
 							<Link
-								to={`/sermons/${sermon._id}`}
-								key={sermon._id}
+								to={`/sermons/${sermon.id}`}
+								key={sermon.id}
 								className='p-2 hover:bg-zinc-800 rounded-md flex items-center gap-3 group cursor-pointer'
 							>
 								<img

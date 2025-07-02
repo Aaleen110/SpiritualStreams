@@ -1,51 +1,71 @@
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-// import { useMusicStore } from "@/stores/useMusicStore";
 import { usePlayerStore } from "@/stores/usePlayerStore";
 import { useTranscriptStore } from "@/stores/useTranscriptStore";
-import { Clock, Pause, Play } from "lucide-react";
-// import { useEffect } from "react";
+import { useSermon } from "@/hooks/useSermon";
+import { Clock, Pause, Play, Loader2 } from "lucide-react";
 import { useParams } from "react-router-dom";
-import { sermons } from "../../lib/mockData";
-
-export const formatDuration = (seconds: number) => {
-	const minutes = Math.floor(seconds / 60);
-	const remainingSeconds = seconds % 60;
-	return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
-};
+import { formatTime } from "@/lib/utils";
 
 const AlbumPage = () => {
 	const { sermonId } = useParams();
-	// const { fetchAlbumById, currentAlbum, isLoading } = useMusicStore();
-	const currentSermon = sermons.find((sermon) => sermon._id === sermonId);
-	const { currentSong, isPlaying, playAlbum, togglePlay } = usePlayerStore();
+	const { sermon: currentSermon, isLoading, error } = useSermon(sermonId);
+	const currentSong = usePlayerStore((state) => state.currentSong);
+	const isPlaying = usePlayerStore((state) => state.isPlaying);
+	const setCurrentSong = usePlayerStore((state) => state.setCurrentSong);
+	const togglePlay = usePlayerStore((state) => state.togglePlay);
+	const playAlbum = usePlayerStore((state) => state.playAlbum);
 	const { openTranscript } = useTranscriptStore();
 
-	// useEffect(() => {
-	// 	if (sermonId) fetchAlbumById(sermonId);
-	// }, [fetchAlbumById, sermonId]);
+	if (isLoading) {
+		return (
+			<div className="h-full flex items-center justify-center">
+				<Loader2 className="h-8 w-8 animate-spin text-zinc-400" />
+			</div>
+		);
+	}
 
-	// if (isLoading) return null;
+	if (error) {
+		return (
+			<div className="h-full flex items-center justify-center">
+				<div className="text-center">
+					<p className="text-red-400 mb-2">Error loading sermon</p>
+					<p className="text-zinc-400 text-sm">{error}</p>
+				</div>
+			</div>
+		);
+	}
 
-	if (!currentSermon) return null;
+	if (!currentSermon) {
+		return (
+			<div className="h-full flex items-center justify-center">
+				<p className="text-zinc-400">Sermon not found</p>
+			</div>
+		);
+	}
 
 	const handlePlayAlbum = () => {
 		if (!currentSermon) return;
 
-		const isCurrentAlbumPlaying = currentSermon?.parts.some((part) => part._id === currentSong?._id);
+		const isCurrentAlbumPlaying = currentSermon?.parts.some((part) => part.id === currentSong?.id);
 		if (isCurrentAlbumPlaying && isPlaying) {
 			// If the current sermon is playing, just toggle pause
 			togglePlay();
 		} else {
 			// Always start playing the sermon from the beginning
-			playAlbum(currentSermon?.parts, 0);
+			if (currentSermon?.parts && currentSermon.parts.length > 0) {
+				playAlbum(currentSermon.parts, 0);
+			}
 		}
 	};
 
 	const handlePlaySong = (index: number) => {
-		if (!currentSermon) return;
+		if (!currentSermon || !currentSermon.parts) return;
 
-		playAlbum(currentSermon?.parts, index);
+		const part = currentSermon.parts[index];
+		if (part) {
+			setCurrentSong(part);
+		}
 	};
 
 	return (
@@ -89,7 +109,7 @@ const AlbumPage = () => {
 								className='w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#D77B1E] hover:bg-[#D77B1E]/90 
                 hover:scale-105 transition-all'
 							>
-								{isPlaying && currentSermon?.parts.some((part) => part._id === currentSong?._id) ? (
+								{isPlaying && currentSermon?.parts.some((part) => part.id === currentSong?.id) ? (
 									<Pause className='h-6 w-6 sm:h-7 sm:w-7 text-black' />
 								) : (
 									<Play className='h-6 w-6 sm:h-7 sm:w-7 text-black' />
@@ -117,10 +137,10 @@ const AlbumPage = () => {
 							<div className='px-2 sm:px-6'>
 								<div className='space-y-2 py-4'>
 									{currentSermon?.parts.map((sermonPart, index) => {
-										const isCurrentSong = currentSong?._id === sermonPart._id;
+										const isCurrentSong = currentSong?.id === sermonPart.id;
 										return (
 											<div
-												key={sermonPart._id}
+												key={sermonPart.id}
 												onClick={() => handlePlaySong(index)}
 												className={`grid grid-cols-[16px_1fr_auto_auto] sm:grid-cols-[16px_4fr_2fr_1fr] gap-2 sm:gap-4 px-2 sm:px-4 py-2 text-sm 
                       text-zinc-400 hover:bg-white/5 rounded-md group cursor-pointer
@@ -146,7 +166,7 @@ const AlbumPage = () => {
 													</div>
 												</div>
 
-												<div className='flex items-center text-xs sm:text-sm'>{formatDuration(sermonPart.duration)}</div>
+												<div className='flex items-center text-xs sm:text-sm'>{formatTime(sermonPart.duration)}</div>
 												<div className='flex items-center'>
 													<button
 														onClick={(e) => {

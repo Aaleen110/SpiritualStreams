@@ -1,5 +1,5 @@
 import { Sermon } from "@/types";
-import SectionGridSkeleton from "./SectionGridSkeleton";
+
 import { Button } from "@/components/ui/button";
 import PlayButton from "./PlayButton";
 import { usePlayerStore } from "@/stores/usePlayerStore";
@@ -26,9 +26,13 @@ const SectionGrid = ({ sermons, title }: SectionGridProps) => {
 			<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4'>
 				{sermons.map((sermon) => (
 					<div
-						key={sermon._id}
+						key={sermon.id}
 						className='bg-zinc-800/40 p-4 rounded-md hover:bg-zinc-700/40 transition-all group cursor-pointer'
-						onClick={() => playAlbum(sermon.parts, 0)}
+						onClick={() => {
+						if (sermon.parts && sermon.parts.length > 0) {
+							playAlbum(sermon.parts, 0);
+						}
+					}}
 					>
 						<div className='relative mb-4'>
 							<div className='aspect-square rounded-md shadow-lg overflow-hidden'>

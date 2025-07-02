@@ -9,15 +9,24 @@ interface PlayButtonProps {
 }
 
 const PlayButton = ({ sermon, className = '' }: PlayButtonProps) => {
-	const { currentSong, isPlaying, playAlbum, togglePlay } = usePlayerStore();
-	const isCurrentSermonPlaying = sermon.parts.some((part) => part._id === currentSong?._id);
+	const currentSong = usePlayerStore((state) => state.currentSong);
+	const isPlaying = usePlayerStore((state) => state.isPlaying);
+	const setCurrentSong = usePlayerStore((state) => state.setCurrentSong);
+	const togglePlay = usePlayerStore((state) => state.togglePlay);
+	const playAlbum = usePlayerStore((state) => state.playAlbum);
+	
+	const isCurrentSermonPlaying = sermon.parts?.some((part) => part.id === currentSong?.id) || false;
 
 	const handlePlay = (e: React.MouseEvent) => {
 		e.stopPropagation();
+		
 		if (isCurrentSermonPlaying && isPlaying) {
 			togglePlay();
 		} else {
-			playAlbum(sermon.parts, 0);
+			// Play the sermon from the beginning
+			if (sermon.parts && sermon.parts.length > 0) {
+				playAlbum(sermon.parts, 0);
+			}
 		}
 	};
 

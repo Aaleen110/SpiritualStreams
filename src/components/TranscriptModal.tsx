@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+
 import {
 	Dialog,
 	DialogContent,
@@ -7,12 +7,12 @@ import {
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Sermon, SermonPart } from "@/types";
-import { X } from "lucide-react";
+
 
 interface TranscriptModalProps {
 	isOpen: boolean;
 	onClose: () => void;
-	sermon: Sermon | null;
+	sermon: Partial<Sermon> | null;
 	sermonPart: SermonPart | null;
 }
 

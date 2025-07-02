@@ -4,6 +4,7 @@ import MainLayout from "./layout/MainLayout";
 import AlbumPage from "./pages/album/AlbumPage";
 // import AdminPage from "./pages/admin/AdminPage";
 import LoginPage from "./pages/login/LoginPage";
+import TestAudioPage from "./pages/test-audio/TestAudioPage";
 // import { useAuthStore } from "./stores/useAuthStore";
 import { Toaster } from "react-hot-toast";
 import NotFoundPage from "./pages/404/NotFoundPage";
@@ -33,6 +34,7 @@ function App() {
 					<Route path='/' element={<HomePage />} />
 					{/* <Route path='/chat' element={<ProtectedRoute><ChatPage /></ProtectedRoute>} /> */}
 					<Route path='/sermons/:sermonId' element={<AlbumPage />} />
+					<Route path='/test-audio' element={<TestAudioPage />} />
 					<Route path='*' element={<NotFoundPage />} />
 				</Route>
 			</Routes>

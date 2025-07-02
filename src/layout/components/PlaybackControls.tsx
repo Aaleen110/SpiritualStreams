@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { usePlayerStore } from "@/stores/usePlayerStore";
 import { useTranscriptStore } from "@/stores/useTranscriptStore";
-import { Laptop2, ListMusic, Mic2, Pause, Play, Repeat, Shuffle, SkipBack, SkipForward, Volume1 } from "lucide-react";
+import { Laptop2, Pause, Play, SkipBack, SkipForward, Volume1 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { sermons } from "../../lib/mockData";
 // import { useParams } from "react-router-dom";
@@ -19,7 +19,7 @@ export const PlaybackControls = () => {
 	// const { sermonId } = useParams();
 	// Find the sermon that contains the currently playing song
 	const currentSermon = currentSong ? sermons.find((sermon) => 
-		sermon.parts.some((part) => part._id === currentSong._id)
+		sermon.parts.some((part) => part.id === currentSong.id)
 	) : null;
 	
 	const [volume, setVolume] = useState(75);
@@ -29,7 +29,8 @@ export const PlaybackControls = () => {
 	const audioRef = useRef<HTMLAudioElement | null>(null);
 
 	useEffect(() => {
-		audioRef.current = document.querySelector("audio");
+		// Use a more specific selector to get the main audio player
+		audioRef.current = document.querySelector("audio[data-audio-player]");
 
 		const audio = audioRef.current;
 		if (!audio) return;
@@ -178,7 +179,7 @@ export const PlaybackControls = () => {
 						className='hover:text-white text-zinc-400' 
 						onClick={() => {
 							if (currentSermon && currentSong) {
-								openTranscript(currentSermon, currentSong);
+								openTranscript(currentSermon as any, currentSong as any);
 							}
 						}}
 					>
@@ -235,7 +236,7 @@ export const PlaybackControls = () => {
 						className='hover:text-white text-zinc-400' 
 						onClick={() => {
 							if (currentSermon && currentSong) {
-								openTranscript(currentSermon, currentSong);
+								openTranscript(currentSermon as any, currentSong as any);
 							}
 						}}
 					>
