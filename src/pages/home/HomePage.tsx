@@ -1,5 +1,5 @@
 import Topbar from "@/components/Topbar";
-import { useEffect } from "react";
+
 import FeaturedSection from "./components/FeaturedSection";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import SectionGrid from "./components/SectionGrid";
@@ -23,7 +23,7 @@ const HomePage = () => {
 	const madeForYouSermons = sermons;
 	
 	// Get trending sermons (all sermons for now)
-	const trendingSermons = sermons;
+
 
 	return (
 		<main className='rounded-md overflow-hidden h-full bg-gradient-to-b from-zinc-800 to-zinc-900 pb-16 sm:pb-0'>

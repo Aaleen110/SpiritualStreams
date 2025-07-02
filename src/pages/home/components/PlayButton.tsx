@@ -11,7 +11,7 @@ interface PlayButtonProps {
 const PlayButton = ({ sermon, className = '' }: PlayButtonProps) => {
 	const currentSong = usePlayerStore((state) => state.currentSong);
 	const isPlaying = usePlayerStore((state) => state.isPlaying);
-	const setCurrentSong = usePlayerStore((state) => state.setCurrentSong);
+
 	const togglePlay = usePlayerStore((state) => state.togglePlay);
 	const playAlbum = usePlayerStore((state) => state.playAlbum);
 	

@@ -1,11 +1,11 @@
 import { usePlayerStore } from "@/stores/usePlayerStore";
 import { config } from "@/config/env";
-import { useEffect, useRef, useState, forwardRef, useImperativeHandle } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const AudioPlayer = () => {
 	const audioRef = useRef<HTMLAudioElement>(null);
 	const prevSongRef = useRef<string | null>(null);
-	const [isLoading, setIsLoading] = useState(false);
+
 	const [error, setError] = useState<string | null>(null);
 
 	const currentSong = usePlayerStore((state) => state.currentSong);
@@ -43,14 +43,13 @@ const AudioPlayer = () => {
 		// check if this is actually a new song
 		const isSongChange = prevSongRef.current !== streamUrl;
 		if (isSongChange) {
-			setIsLoading(true);
+
 			setError(null);
 			
 			// Simplified event handling like TestAudioPage
-			const handleLoadStart = () => setIsLoading(true);
-			const handleCanPlay = () => setIsLoading(false);
+			const handleLoadStart = () => {};
+			const handleCanPlay = () => {};
 			const handleError = (e: any) => {
-				setIsLoading(false);
 				setError(`Audio error: ${e.target.error?.message || 'Unknown error'}`);
 				console.error('Audio error:', e.target.error);
 			};

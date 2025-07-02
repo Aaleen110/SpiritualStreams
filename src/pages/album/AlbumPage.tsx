@@ -9,6 +9,8 @@ import { formatTime } from "@/lib/utils";
 
 const AlbumPage = () => {
 	const { sermonId } = useParams();
+	console.log('AlbumPage: Received sermonId from params:', sermonId);
+	
 	const { sermon: currentSermon, isLoading, error } = useSermon(sermonId);
 	const currentSong = usePlayerStore((state) => state.currentSong);
 	const isPlaying = usePlayerStore((state) => state.isPlaying);
@@ -16,6 +18,8 @@ const AlbumPage = () => {
 	const togglePlay = usePlayerStore((state) => state.togglePlay);
 	const playAlbum = usePlayerStore((state) => state.playAlbum);
 	const { openTranscript } = useTranscriptStore();
+
+	console.log('AlbumPage: Current sermon:', currentSermon, 'isLoading:', isLoading, 'error:', error);
 
 	if (isLoading) {
 		return (
